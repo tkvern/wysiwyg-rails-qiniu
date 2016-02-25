@@ -1,13 +1,14 @@
-# wysiwyg-rails [![Gem Version](https://badge.fury.io/rb/wysiwyg-rails.png)](http://badge.fury.io/rb/wysiwyg-rails) [![Build Status](https://secure.travis-ci.org/froala/wysiwyg-rails.png)](http://travis-ci.org/froala/wysiwyg-rails)
+# wysiwyg-rails-qiniu 
 
-wysiwyg-rails provides the [Froala WYSIWYG HTML Editor](https://froala.com/wysiwyg-editor) javascript and stylesheets as a Rails engine for use with the asset pipeline.
+wysiwyg-rails-qiniu 是基于 [wysiwyg-rails](https://rubygems.org/gems/wysiwyg-rails)制作, 上传的资源直接支持七牛云存储
+在使用该gem包前,你得会使用七牛云存储
 
 ## Installation
 
 Add this to your Gemfile:
 
 ```ruby
-gem "wysiwyg-rails"
+gem "wysiwyg-rails-qiniu"
 ```
 
 and run `bundle install`.
