@@ -3,19 +3,19 @@
 wysiwyg-rails-qiniu 是基于 [wysiwyg-rails](https://rubygems.org/gems/wysiwyg-rails)制作, 上传的资源直接支持七牛云存储
 在使用该gem包前,你得会使用七牛云存储
 
-## Installation
+## 安装
 
-Add this to your Gemfile:
+添加下面代码到你的 Gemfile:
 
 ```ruby
 gem "wysiwyg-rails-qiniu"
 ```
 
-and run `bundle install`.
+然后运行 `bundle install`.
 
-## Include in your assets
+## 将资源文件加入到你的 `assets`目录
 
-In your `application.css`, include the css file:
+在你的 `application.css` 文件中, 引入下列文件:
 
 ```css
 /*
@@ -25,9 +25,9 @@ In your `application.css`, include the css file:
  */
 ```
 
-If you want to use the dark theme, then you have to include `themes/dark.min.css` file too.
+如果你想使用黑色主题, 你可以加入 `themes/dark.min.css` 到`application.css`文件中.
 
-In your `application.js`, include the JS file:
+在你的 `application.js`, 引入以下文件:
 
 ```javascript
 //
@@ -35,9 +35,11 @@ In your `application.js`, include the JS file:
 //
 ```
 
-If you need to use any of the [Available Plugins](https://froala.com/wysiwyg-editor/docs/plugins), then you should include those too in your `application.js` and `application.css`.
+如果你想使用更多功能插件 [Available Plugins](https://froala.com/wysiwyg-editor/docs/plugins), 你应该将下面的这些文件加入的 `application.js` 和 `application.css`.
+其中`support_qiniu.min.js`是必须要引入的,否则无法使用七牛云存储
 ```javascript
 // Include other plugins.
+//= require plugins/support_qiniu.min.js
 //= require plugins/align.min.js
 //= require plugins/char_counter.min.js
 //= require plugins/code_beautifier.min.js
@@ -82,21 +84,64 @@ If you need to use any of the [Available Plugins](https://froala.com/wysiwyg-edi
  */
 ```
 
-Similar, if you want to use language translation you have to include the translation file.
+同样的,如果你要使用中文语言包,请加入响应的js
 ```javascript
 // Include Language if needed
-//= require languages/ro.js
+//= require languages/zh_cn.js
 ```
 
-Then restart your web server if it was previously running.
+到目前位置你已经配置好编辑的基本资源,你需要重启rails服务器
+## 初始化编辑器
 
-## Initialize Froala Editor
+详细文档请参见作者官网 [Froala WYSIWYG Editor official documentation](https://www.froala.com/wysiwyg-editor/docs).
 
-Details about initializing the editor can be found in the [Froala WYSIWYG Editor official documentation](https://www.froala.com/wysiwyg-editor/docs).
+这里提供部分示例代码, 在使用下面代码之前你应该需要知道如何生成七牛上传凭证
+```javascript
+  $(function() {
+    $('#edit').froalaEditor({
+      language: "zh_cn",
+      width: 900,
+      heightMin: 300,
+      heightMax: 500,
+      requestWithCORS: false,
 
-## License
+      //图片上传配置(必须)
+      imageUploadDomain: "<%= Rails.application.config.qiniu_domain %>",    //七牛云存储空间域名地址
+      imageUploadParam: 'file',
+      imageUploadURL: 'http://upload.qiniu.com',                            //七牛上传服务器, 如果是海外服务器为 http://up.qiniu.com
+      imageUploadParams: { token: '<%= @uptoken %>'},                       //上传凭证, 详细规则查看七牛官方文档
+      imageUploadMethod: 'POST',
+      imageMaxSize: 5 * 1024 * 1024,
+      imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+      
+      //文件上传配置(必须)
+      fileUploadDomain: "<%= Rails.application.config.qiniu_domain %>",     //七牛云存储空间域名地址
+      fileUploadParam: 'file',
+      fileUploadURL: 'http://upload.qiniu.com',                             //同上
+      fileUploadParams: { token: '<%= @uptoken %>'},                        //同上
+      fileUploadMethod: 'POST',
+      fileMaxSize: 20 * 1024 * 1024,
+      fileAllowedTypes: ['*']
+    });
+  });
+```
 
-The `wysiwyg-rails` project is under MIT license. However, in order to use Froala WYSIWYG HTML Editor plugin you should purchase a license for it.
+## 配置代码视图
+使用代码视图加高亮效果,可加入以下代码,也可以安装[codemirror-rails](https://rubygems.org/gems/codemirror-rails)这个gem包
 
+```html
+<link href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css" media="screen" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+```
+
+## 许可
+
+wyg-rails项目是在麻省理工学院的许可。然而,为了使用Froala WYSIWYG HTML编辑器插件你应该购买一个许可证。
+下面是许可链接,请支持源作者
 Froala Editor has [3 different licenses](https://froala.com/wysiwyg-editor/pricing).
 For details please see [License Agreement](https://froala.com/wysiwyg-editor/terms).
+
+## 致谢
+感谢Froala项目作者的贡献, 我在项目的原基础上增加了对七牛云存储的支持.
+如果你需要使用其它的云存储平台,请使用[wysiwyg-rails](https://rubygems.org/gems/wysiwyg-rails)
