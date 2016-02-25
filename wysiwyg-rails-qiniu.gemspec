@@ -2,15 +2,15 @@
 require File.expand_path('../lib/wysiwyg-rails/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Froala Labs"]
-  gem.email         = ["stefan@froala.com"]
-  gem.description   = "A beautiful jQuery WYSIWYG HTML text editor. High performance and modern design make it easy to use for developers and loved by users."
-  gem.summary       = "an asset gemification of the Froala WYSIWYG Editor library"
-  gem.homepage      = "https://github.com/froala/wysiwyg-rails"
+  gem.authors       = ["tkvern"]
+  gem.email         = ["tkvern@qq.com"]
+  gem.description   = "A base on jQuery WYSIWYG HTML text editor.Thanks for authorship-- stefanneculai. Please support him"
+  gem.summary       = "Support Qiniu storage"
+  gem.homepage      = "https://github.com/tkvern/wysiwyg-rails-qiniu"
   gem.licenses      = ["MIT"]
 
   gem.files         = Dir["{app,lib}/**/*"] + ["LICENSE" ,"Rakefile", "README.md"]
-  gem.name          = "wysiwyg-rails"
+  gem.name          = "wysiwyg-rails-qiniu"
   gem.require_paths = ["lib"]
   gem.version       = WYSIWYG::Rails::VERSION
 
