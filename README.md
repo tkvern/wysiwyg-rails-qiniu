@@ -85,6 +85,7 @@ gem "wysiwyg-rails-qiniu"
 ```
 
 同样的,如果你要使用中文语言包,请加入响应的js
+
 ```javascript
 // Include Language if needed
 //= require languages/zh_cn.js
@@ -93,7 +94,7 @@ gem "wysiwyg-rails-qiniu"
 到目前位置你已经配置好编辑的基本资源,你需要重启rails服务器
 ## 初始化编辑器
 
-详细文档请参见作者官网 [Froala WYSIWYG Editor official documentation](https://www.froala.com/wysiwyg-editor/docs).
+详细文档请参见作者官网,提供了初始化代码 [Froala WYSIWYG Editor official documentation](https://www.froala.com/wysiwyg-editor/docs).
 
 这里提供部分示例代码, 在使用下面代码之前你应该需要知道如何生成七牛上传凭证
 ```javascript
@@ -127,7 +128,7 @@ gem "wysiwyg-rails-qiniu"
 ```
 
 ## 配置代码视图
-使用代码视图加高亮效果,可加入以下代码,也可以安装[codemirror-rails](https://rubygems.org/gems/codemirror-rails)这个gem包
+使用代码视图加高亮效果,可加入以下代码,也可以使用[codemirror-rails](https://rubygems.org/gems/codemirror-rails)这个gem包
 
 ```html
 <link href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css" media="screen" rel="stylesheet">
@@ -144,4 +145,4 @@ For details please see [License Agreement](https://froala.com/wysiwyg-editor/ter
 
 ## 致谢
 感谢Froala项目作者的贡献, 我在项目的原基础上增加了对七牛云存储的支持.
-如果你需要使用其它的云存储平台,请使用[wysiwyg-rails](https://rubygems.org/gems/wysiwyg-rails)
+如果你需要使用其它的云存储平台,请使用[wysiwyg-rails](https://rubygems.org/gems/wysiwyg-rails)进行自定义配置
